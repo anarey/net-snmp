@@ -1,7 +1,8 @@
 HOME="/app"
 TOPIC="snmptest"
 NETSNMP_PATH_TEST=$HOME"/testing/test-kafka"
-APP_SNMPTRAPD=$HOME/apps/snmptrapd "-Lf" /var/log/snmptrapd "-d -c" /app/snmptrapd.conf
+APP_SNMPTRAPD=$HOME"/apps/snmptrapd -Lf /var/log/snmptrapd -d -c /app/snmptrapd.conf"
+
 echo "==============================================="
 echo "NET-SNMP"
 echo $APP_SNMPTRAPD
