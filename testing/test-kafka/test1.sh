@@ -18,7 +18,7 @@ $APP_SNMPTRAPD
 # kafkacat:
 
 KAFKACAT_PATH="/kafkacat"
-JSON_OUT=$NETSNMP_PATH_TEST'json_message1.log'
+JSON_OUT=$NETSNMP_PATH_TEST"/json_message1.log"
 
 IP_KAFKA="172.16.238.11"
 
@@ -64,6 +64,13 @@ PYCHECKJSON="/bin/checkjson.py"
 JSON_CHECK_TEMPLATE="template-trap1.json"
 #DEBUG=" -d"
 DEBUG=""
+
+echo "El json output"
+echo $JSON_OUT
+cat $JSON_OUT
+echo "---------------------"
+
+
 echo "==============================================="
 echo $PYCHECKJSON -t $FREERADIUS_PATH_TEST$JSON_CHECK_TEMPLATE -j $JSON_OUT$DEBUG
 echo "==============================================="
