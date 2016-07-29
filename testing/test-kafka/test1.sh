@@ -7,6 +7,7 @@ echo "==============================================="
 echo "NET-SNMP"
 echo $APP_SNMPTRAPD
 echo "==============================================="
+cp -a /app/mibs /usr/local/share/snmp/
 
 $APP_SNMPTRAPD
 
@@ -16,13 +17,14 @@ KAFKACAT_PATH="/kafkacat"
 JSON_OUT=$NETSNMP_PATH_TEST'json_message1.log'
 
 IP_KAFKA="172.16.238.11"
+
+sleep 5
 echo "==============================================="
 echo "Kafkacat. Get the json messages. output: 'json_out_kafka.log' "
 echo $KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t $TOPIC
 echo "==============================================="
 $KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t $TOPIC > $JSON_OUT &
 
-cp -a /app/mibs /usr/local/share/snmp/
 
 TRAP1="/app/apps/snmptrap -v 2c -c redborder localhost '' NET-SNMP-EXAMPLES-MIB::netSnmpExampleHeartbeatNotification netSnmpExampleHeartbeatRate i 123456"
 PATH_NETSNMP=$HOME""
@@ -70,4 +72,4 @@ echo "======== /app/testing/test-kafkajson_message1.log"
 cat /app/testing/test-kafkajson_message1.log
 
 echo "= log = "
-cat /app//var/log/snmptrapd.log
+cat /app/var/log/snmptrapd.log
