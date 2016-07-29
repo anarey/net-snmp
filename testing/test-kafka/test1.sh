@@ -7,6 +7,10 @@ echo "==============================================="
 echo "NET-SNMP"
 echo $APP_SNMPTRAPD
 echo "==============================================="
+
+export MIBS=ALL
+export SNMPCONFPATH=/app/snmp.conf
+
 cp -a /app/mibs /usr/local/share/snmp/
 
 $APP_SNMPTRAPD
@@ -18,6 +22,7 @@ JSON_OUT=$NETSNMP_PATH_TEST'json_message1.log'
 
 IP_KAFKA="172.16.238.11"
 
+echo "------------------------------------------------------------------------"
 sleep 5
 echo "==============================================="
 echo "Kafkacat. Get the json messages. output: 'json_out_kafka.log' "
