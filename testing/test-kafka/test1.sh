@@ -1,7 +1,7 @@
 HOME="/app"
 TOPIC="snmptest"
 NETSNMP_PATH_TEST=$HOME"/testing/test-kafka"
-APP_SNMPTRAPD=$HOME"/apps/snmptrapd -Lf /var/log/snmptrapd -d -c /app/snmptrapd.conf"
+APP_SNMPTRAPD=$HOME"/apps/snmptrapd -Lf /var/log/snmptrapd.log -d -c /app/snmptrapd.conf"
 
 echo "==============================================="
 echo "NET-SNMP"
@@ -69,3 +69,5 @@ echo "==============================================="
 echo "======== /app/testing/test-kafkajson_message1.log"
 cat /app/testing/test-kafkajson_message1.log
 
+echo "= log = "
+cat /app//var/log/snmptrapd.log
