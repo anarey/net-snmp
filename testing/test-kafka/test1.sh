@@ -37,7 +37,12 @@ TRAP2="./apps/snmptrap -v 1 -c redborder localhost '1.2.3.4.5.6' '192.193.194.19
 
 #$KAFKACAT_PATH/kafkacat -L -b $IP_KAFKA -t $TOPIC
 
+
+
 #$TRAP1
+echo "==============================================="
+echo $TRAP2
+echo "==============================================="
 $TRAP2
 
 sleep 10
