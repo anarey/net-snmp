@@ -1,9 +1,9 @@
 HOME="/app"
 TOPIC="snmptest"
 NETSNMP_PATH_TEST=$HOME"/testing/test-kafka"
-APP_SNMPTRAPD=$HOME/apps/snmptrapd -Lf /var/log/snmptrapd -d -c /app/snmptrapd.conf
+APP_SNMPTRAPD=$HOME/apps/snmptrapd "-Lf" /var/log/snmptrapd "-d -c" /app/snmptrapd.conf
 echo "==============================================="
-echo "Freeradius server"
+echo "NET-SNMP"
 echo $APP_SNMPTRAPD
 echo "==============================================="
 
@@ -17,9 +17,9 @@ JSON_OUT=$NETSNMP_PATH_TEST'json_message1.log'
 IP_KAFKA="172.16.238.11"
 echo "==============================================="
 echo "Kafkacat. Get the json messages. output: 'json_out_kafka.log' "
-echo $KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t radius4
+echo $KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t $TOPIC
 echo "==============================================="
-$KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t radius4 > $JSON_OUT &
+$KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t $TOPIC > $JSON_OUT &
 
 cp -a /app/mibs /usr/local/share/snmp/
 
@@ -64,4 +64,7 @@ echo "==============================================="
 echo $PYCHECKJSON -t $FREERADIUS_PATH_TEST$JSON_CHECK_TEMPLATE -j $JSON_OUT$DEBUG
 echo "==============================================="
 #$PYCHECKJSON -t $FREERADIUS_PATH_TEST$JSON_CHECK_TEMPLATE -j $JSON_OUT$DEBUG
+
+echo "======== /app/testing/test-kafkajson_message1.log"
+cat /app/testing/test-kafkajson_message1.log
 
