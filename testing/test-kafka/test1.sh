@@ -43,7 +43,8 @@ TRAP2="/app/apps/snmptrap -v 1 -c redborder localhost '1.2.3.4.5.6' '192.193.194
 echo "==============================================="
 echo $TRAP2
 echo "==============================================="
-$TRAP2
+#$TRAP2
+/app/apps/snmptrap -v 1 -c redborder localhost '1.2.3.4.5.6' '192.193.194.195' 6 99 '55' 1.11.12.13.14.15  s "teststring"
 
 sleep 10
 
