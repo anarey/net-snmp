@@ -33,7 +33,7 @@ $KAFKACAT_PATH/kafkacat -C -c 3 -o beggining -b $IP_KAFKA -t $TOPIC > $JSON_OUT 
 
 TRAP1="/app/apps/snmptrap -v 2c -c redborder localhost '' NET-SNMP-EXAMPLES-MIB::netSnmpExampleHeartbeatNotification netSnmpExampleHeartbeatRate i 123456"
 
-TRAP2="./apps/snmptrap -v 1 -c redborder localhost '1.2.3.4.5.6' '192.193.194.193' 6 99 '55' 1.11.12.13.14.15  s 'teststring23w222'"
+TRAP2="/app/apps/snmptrap -v 1 -c redborder localhost '1.2.3.4.5.6' '192.193.194.193' 6 99 '55' 1.11.12.13.14.15  s 'teststring23w222'"
 
 #$KAFKACAT_PATH/kafkacat -L -b $IP_KAFKA -t $TOPIC
 
