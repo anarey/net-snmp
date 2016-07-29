@@ -1,5 +1,5 @@
 HOME="/app"
-TOPIC="snmptest"
+TOPIC="rb_snmp"
 NETSNMP_PATH_TEST=$HOME"/testing/test-kafka"
 APP_SNMPTRAPD=$HOME"/apps/snmptrapd -Lf /var/log/snmptrapd.log -d -c /app/snmptrapd.conf"
 
@@ -42,16 +42,7 @@ $TRAP2
 
 sleep 10
 
-# Stop freeradius and kafkacat
-if ps aux | grep -v "grep" | grep "valgrind" 1> /dev/null
-then
-    echo "Valgrind is running. Send SIGINT to valgrind"
-    for i in `ps aux | grep -v "grep"|grep "valgrind"|awk '{print $2}'|uniq`; do kill -SIGINT $i; done
-else
-   echo "Valgrind is stopped"
-fi
-
-sleep 5
+# Stop kafkacat
 if ps aux | grep -v "grep" | grep "kafkacat" 1> /dev/null
 then
     echo "kafkacat is running. Kill it."
