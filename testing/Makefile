@@ -205,14 +205,3 @@ scapitest.lo: ../snmplib/asn1.h ../snmplib/callback.h ../snmplib/keytools.h
 scapitest.lo: ../snmplib/scapi.h ../snmplib/snmp_api.h ../snmplib/tools.h
 scapitest.lo: ../snmplib/transform_oids.h ../s/sysv.h 
 T.lo: ../config.h ../m/generic.h ../s/generic.h ../s/linux.h ../s/sysv.h
-
-
-# Makefile wrapper for expanding 0*.c glob.
-
-all test clean coverage:
-	@echo "=================== SELFTESTS ======================="
-	@(export TEST_SRCS="`echo 0*.c`"; make -B -f Makefile.tests $@)
-
-testcontinue:
-	@echo "=================== SELFTESTS (continue on fail) ===="
-	@(export TEST_SRCS="`echo 0*.c`"; make -B -k -f Makefile.tests test)

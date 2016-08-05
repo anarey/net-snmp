@@ -1,14 +1,15 @@
-include ../Makefile.config
+#include ../Makefile.config
 
 CC ?= cc
 TEST_PROGS := ${TEST_SRCS:%.c=%.test}
 XML_FILES  := ${TEST_SRCS:%.c=%.test.xml}
 COV_FILES  := ${TEST_SRCS:%.c=%.gcda} ${TEST_SRCS:%.c=%.gcno}
 CFLAGS += -g
-CFLAGS += -fstack-protector -DFORTIFY_SOURCE=2 --param=ssp-buffer-size=4 -Wformat
-CFLAGS += -Wall -Wfloat-equal -Wpointer-arith -O0 -I ../src/decoder/ \
-	-I ../src/engine -I ../ -I ../src/listener/ -I ../src/util/ \-I/opt/rb/include
-LIBS += -lcmocka
+CFLAGS += -fstack-protector -DFORTIFY_SOURCE=2 --param=ssp-buffer-size=4 -Wformat \
+       -DFORTIFY_SOURCE=2
+CFLAGS += -Wall -Wfloat-equal -Wpointer-arith -O0 -I \
+	-I../ -I/opt/rb/include
+LDFLAGS += -lpthread -lrt -lz -lrd
 
 COVERAGE_CPPFLAGS = --coverage
 COVERAGE_LDFLAGS = --coverage
@@ -17,24 +18,16 @@ COVERAGE_OUTPUT_DIRECTORY = out
 
 .PHONY = coverage
 
-# Profiling
-#CFLAGS += -O0 -pg
-#LDFLAGS += -pg
+all: tests
 
-all: test
-
-%.test: %.c %.objdeps
-	$(CC) $(CFLAGS)  $(CPPFLAGS) $< `cat $(subst .c,.objdeps,$<)` -o $@ $(LDFLAGS) $(LIBS)
-	CMOCKA_MESSAGE_OUTPUT=XML CMOCKA_XML_FILE=$@.xml ./$@
-	# cat ./$@.xml
+tests:
+	sh ./run-test.sh
 
 coverage:
 	LDFLAGS="${LDFLAGS} ${COVERAGE_LDFLAGS}" CPPFLAGS="${CPPFLAGS} ${COVERAGE_CPPFLAGS}" make
 	lcov --rc lcov_branch_coverage=1 --capture --directory ../ --output-file ${COVERAGE_INFO}
 	genhtml --branch-coverage ${COVERAGE_INFO} --output-directory ${COVERAGE_OUTPUT_DIRECTORY}
-
-test: $(TEST_PROGS)
-
+	echo "aaaa"
 clean:
-	rm -f $(TEST_PROGS) $(XML_FILES) $(COV_FILES) $(COVERAGE_INFO)
+	rm -f $(XML_FILES) $(COV_FILES) $(COVERAGE_INFO)
 	rm -rf $(COVERAGE_OUTPUT_DIRECTORY)
