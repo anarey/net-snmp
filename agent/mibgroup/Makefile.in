@@ -1,6 +1,6 @@
 top_builddir=../..
 # currently assumes gcc:    (XXX: fix via configure tests)
-DLFLAGS=-fPIC -shared
+DLFLAGS=--coverage -fPIC -shared
 
 # use GNU vpath, if available, to only set a path for source and headers
 # VPATH will pick up objects too, which is bad if you are sharing a
